@@ -1,0 +1,48 @@
+name: Deploy to S3
+
+on:
+  push:
+    branches:
+      - feat/auto-deploy
+
+jobs:
+  deploy:
+    runs-on: ubuntu-latest
+
+    env:
+      BUCKET_NAME: ${{ vars.BUCKET_NAME }}
+      AWS_REGION: ${{ vars.AWS_REGION }}
+      DISTRIBUTION_ID: ${{ vars.DISTRIBUTION_ID }}
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v2
+
+      - name: Install Node.js
+        uses: actions/setup-node@v2
+        with:
+          node-version: '20'
+
+      - name: Install AWS CLI
+        run: |
+          sudo apt-get update
+          sudo apt-get install -y awscli
+
+      - name: Install dependencies
+        run: npm install
+
+      - name: Build React app
+        run: npm run build
+
+      - name: Set up AWS credentials
+        uses: aws-actions/configure-aws-credentials@v2
+        with:
+          aws-access-key-id: ${{ secrets.AWS_ACCESS_KEY_ID }}
+          aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
+          aws-region: ${{ env.AWS_REGION }}
+
+      - name: Copy files to S3 bucket
+        run: aws s3 cp build/ s3://$BUCKET_NAME --recursive
+
+      - name: Invalidate CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
