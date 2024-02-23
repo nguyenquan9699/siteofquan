@@ -4,9 +4,11 @@ This project was bootstrapped with [Create React App](https://github.com/faceboo
 
 # Lint
 
-Lint: npm run lint
-Auto-fix linting issues: npm run lint:fix
-Format: npm run format
+```
+npm run lint
+npm run lint:fix
+npm run format
+```
 
 # Credit
 
