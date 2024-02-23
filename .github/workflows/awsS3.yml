@@ -35,14 +35,14 @@ jobs:
           aws-secret-access-key: ${{ secrets.AWS_SECRET_ACCESS_KEY }}
           aws-region: ${{ env.AWS_REGION }}
       
-      - name: Set up AWS Artifact connection
-        run: aws codeartifact login --tool npm --repository siteofquan-fe --domain siteofquan --domain-owner 566958912930 --region ap-southeast-1
-
       - name: Install dependencies
         run: npm install
 
       - name: Build React app
         run: npm run build
+
+      - name: Set up AWS Artifact connection
+        run: aws codeartifact login --tool npm --repository siteofquan-fe --domain siteofquan --domain-owner 566958912930 --region ap-southeast-1
 
       - name: Pushlish Artifact
         run: npm publish
