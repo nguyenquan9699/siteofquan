@@ -8,7 +8,7 @@ export function AboutSections() {
 
       <section class="about-text">
         <h3 class="h3 service-title">What I can provide?</h3>
-        {API.getMyServices()}
+        {ListOfService(API.getMyServices())}
       </section>
     </>
   )
@@ -19,7 +19,7 @@ export function ResumeSections() {
     <>
       <section class="timeline">
         <div class="title-wrapper">
-          <div class="icon-box">
+          <div class="icon-box" style={{ background: '#CEB152' }}>
             <ion-icon
               name="book-outline"
               role="img"
@@ -32,36 +32,13 @@ export function ResumeSections() {
         </div>
 
         <ol class="timeline-list">
-          <li class="timeline-item">
-            <h4 class="h4 timeline-item-title">
-              Ho Chi Minh City University of Science
-            </h4>
-            <h5 class="h5 timeline-item-title">
-              Honors Program, Faculty of Information Technology
-            </h5>
-            <span>2017 — 2022</span>
-
-            <p class="timeline-text">
-              <ul>
-                <li>
-                  + Participated in scientific research and published paper:
-                  Security Issues in Android Application Development and Plug-in
-                  for Android Studio to Support Secure Programming
-                </li>
-                <li>+ Some mini-projects: Demos</li>
-                <li>
-                  + Graduation project: Android Studio Static Code Analysis
-                  Plugin 9Fix
-                </li>
-              </ul>
-            </p>
-          </li>
+          {TimelineItem(...API.getMyEducation())}
         </ol>
       </section>
 
       <section class="timeline">
         <div class="title-wrapper">
-          <div class="icon-box">
+          <div class="icon-box" style={{ background: '#CEB152' }}>
             <ion-icon
               name="book-outline"
               role="img"
@@ -74,69 +51,9 @@ export function ResumeSections() {
         </div>
 
         <ol class="timeline-list">
-          <li class="timeline-item">
-            <h4 class="h4 timeline-item-title">
-              Junior Flutter Developer - NOA Experience Colombia
-            </h4>
+          {TimelineItem(...API.getMyExp1())}
 
-            <span>May 2023 — Present</span>
-
-            <p class="timeline-text">
-              During this time, I've learned to work with technologies like
-              Riverpod, BLoC, Freezed, JsonSerializable, and I've delved into
-              clean architecture, implemented animations, and worked with
-              websockets and streams. Every day is an opportunity to grow and
-              learn as I build solutions in the exciting world of mobile
-              programming.
-            </p>
-          </li>
-
-          <li class="timeline-item">
-            <h4 class="h4 timeline-item-title">
-              Mine Operations Supervisor - Alpayana Mining Company
-            </h4>
-
-            <span>Oct 2021 — Jan 2023</span>
-
-            <p class="timeline-text">
-              In my role as a Mine Operations Supervisor, I had the
-              responsibility of leading and coordinating the daily activities of
-              the team of workers under my supervision. I worked closely with
-              the production staff to ensure efficient and safe mining
-              operations.
-            </p>
-          </li>
-
-          <li class="timeline-item">
-            <h4 class="h4 timeline-item-title">
-              Planning and Productivity - Volcan Mining Company
-            </h4>
-
-            <span>Sep 2019 — Sep 2021</span>
-
-            <p class="timeline-text">
-              During my time at the company, I played a key role in cost
-              reduction by implementing effective measures to decrease
-              explosives consumption in mining operations. My focus was on
-              optimizing blasting processes by applying innovative techniques
-              and efficient strategies.
-            </p>
-          </li>
-
-          <li class="timeline-item">
-            <h4 class="h4 timeline-item-title">
-              Mining Planning - Buenaventura Mining Company
-            </h4>
-
-            <span>Nov 2018 — Aug 2019</span>
-
-            <p class="timeline-text">
-              I developed and created computer applications using Python in the
-              mining software Minesight to automate block handling. Improved
-              efficiency and precision in mining planning, reduced processing
-              times, and minimized human errors.
-            </p>
-          </li>
+          {TimelineItem(...API.getMyExp2())}
         </ol>
       </section>
     </>
@@ -149,7 +66,15 @@ export function SkillsSections() {
       <section class="skill">
         <h3 class="h3 skills-title">Technical skills</h3>
 
-        {listOfSkill(API.getTechskills())}
+        {ListOfSkills(API.getTechskills())}
+      </section>
+
+      <br></br>
+
+      <section class="skill">
+        <h3 class="h3 skills-title">More details</h3>
+
+        {ListOfDemos(API.getSomeCode())}
       </section>
 
       <br></br>
@@ -157,13 +82,15 @@ export function SkillsSections() {
       <section class="skill">
         <h3 class="h3 skills-title">Soft skills</h3>
 
-        {listOfSkill(API.getSoftskills())}
+        {ListOfSkills(API.getSoftskills())}
       </section>
+
       <br></br>
+
       <section class="skill">
         <h3 class="h3 skills-title">Languages</h3>
 
-        {listOfSkill(API.getLangskills())}
+        {ListOfSkills(API.getLangskills())}
       </section>
     </>
   )
@@ -194,9 +121,9 @@ export function CreditSections() {
   return <section class="about-text">{API.getCredit()}</section>
 }
 
-function listOfSkill(listOfSkills) {
+function ListOfSkills(listOfSkills) {
   return (
-    <ul className="skills-list content-card">
+    <ul className="skills-list content-card" style={{cursor: 'default'}}>
       {listOfSkills.map((skill, index) => (
         <li key={index} className="skills-item">
           <div className="title-wrapper">
@@ -206,4 +133,52 @@ function listOfSkill(listOfSkills) {
       ))}
     </ul>
   )
+}
+
+function ListOfService(listOfServices) {
+  return (
+    <ol class="timeline-list">
+      {listOfServices.map((service) => (
+      <li class="timeline-item">
+        <h4 class="timeline-text">
+          {service}
+        </h4>
+      </li>
+      ))}
+    </ol>
+  )
+}
+
+function ListOfDemos(listofDemos) {
+  return (
+    <ul className="skills-list content-card">
+      {listofDemos.map(item => (
+        <li className="skills-item">
+          <a href={item[1]}>
+            <div className="title-wrapper">
+              <h5 className="h5">{item[0]}</h5>
+            </div>
+          </a>
+        </li>
+      ))}
+    </ul>
+  );
+}
+
+function TimelineItem(title, subtitle, time, content) {
+  return (
+    <li class="timeline-item">
+      <h4 class="h4 timeline-item-title">
+        {title}
+      </h4>
+      <h5 class="h5 timeline-item-title">
+        {subtitle}
+      </h5>
+      <span>{time}</span>
+
+      <p class="timeline-text">
+        {content}
+      </p>
+    </li>
+  );
 }

@@ -3,16 +3,16 @@ name: Deploy to S3
 on:
   push:
     branches:
-      - feat/create-first-UI
+      - release/*
 
 jobs:
   deploy:
     runs-on: ubuntu-latest
 
     env:
-      BUCKET_NAME: ${{ vars.BUCKET_NAME }}
+      BUCKET_NAME: ${{ vars.BUCKET_NAME_PROD }}
       AWS_REGION: ${{ vars.AWS_REGION }}
-      DISTRIBUTION_ID: ${{ vars.DISTRIBUTION_ID }}
+      DISTRIBUTION_ID: ${{ vars.DISTRIBUTION_ID_PROD }}
 
     steps:
       - name: Checkout code
@@ -47,8 +47,8 @@ jobs:
       - name: Pushlish Artifact
         run: npm publish
 
-      # - name: Copy files to S3 bucket
-      #   run: aws s3 cp build/ s3://$BUCKET_NAME --recursive
+      - name: Copy files to S3 bucket
+        run: aws s3 cp build/ s3://$BUCKET_NAME_PROD --recursive
 
-      # - name: Invalidate CloudFront cache
-      #   run: aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID --paths "/*"
+      - name: Invalidate CloudFront cache
+        run: aws cloudfront create-invalidation --distribution-id $DISTRIBUTION_ID_PROD --paths "/*"
