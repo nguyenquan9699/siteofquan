@@ -13,7 +13,7 @@ jobs:
       BUCKET_NAME: ${{ vars.BUCKET_NAME_DEV }}
       AWS_REGION: ${{ vars.AWS_REGION }}
       DISTRIBUTION_ID: ${{ vars.DISTRIBUTION_ID_DEV }}
-      ARTIFACT_REPOS: siteofquan-fe-prod
+      ARTIFACT_REPOS: siteofquan-fe
 
     steps:
       - name: Checkout code
