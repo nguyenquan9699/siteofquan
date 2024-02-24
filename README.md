@@ -1,6 +1,11 @@
-# Getting Started with Create React App
+# Create React App
 
 This project was bootstrapped with [Create React App](https://github.com/facebook/create-react-app).
+
+# TODO
+
++ Move data in query.js to BE
++ Split components into smaller components
 
 # Lint
 

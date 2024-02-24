@@ -26,6 +26,14 @@ export function getAddress() {
   return 'Ho Chi Minh City, Vietnam'
 }
 
+export function getTelegram() {
+  return 't.me/w3bqq'
+}
+
+export function getGithub() {
+  return 'github.com/nguyenquan9699'
+}
+
 export function getIntro() {
   return (
     <p>
@@ -49,7 +57,7 @@ export function getTechskills() {
 }
 
 export function getSomeCode() {
-  return [['This Page CI/CD', 'https://github.com/nguyenquan9699/siteofquan-FE/tree/main/.github/workflows'], ['This Page Infrastructure', 'https://github.com/nguyenquan9699/siteofquan-infra'], ['This Page Source', 'https://github.com/nguyenquan9699/siteofquan-FE'], ['My Graduate Plugin Project', 'https://plugins.jetbrains.com/plugin/17142-9fix'], ['Some Fun Mini Project Demos', 'https://www.youtube.com/watch?v=lijx1dan17Q&list=PLn6LVePqCRFdYKbVK3lPLYAe5WW3tKr50']]
+  return [['Check This Page CI/CD Pinelines', 'https://github.com/nguyenquan9699/siteofquan-FE/tree/main/.github/workflows'], ['Check This Page Infrastructure', 'https://github.com/nguyenquan9699/siteofquan-infra'], ['Check This Page Source', 'https://github.com/nguyenquan9699/siteofquan-FE'], ['Check My Graduation Plugin Project', 'https://plugins.jetbrains.com/plugin/17142-9fix'], ['Some College Project Demos', 'https://www.youtube.com/watch?v=lijx1dan17Q&list=PLn6LVePqCRFdYKbVK3lPLYAe5WW3tKr50']]
 }
 
 export function getSoftskills() {
@@ -62,6 +70,12 @@ export function getLangskills() {
 
 export function getCertificates() {
   return (
+    <><p>
+      AWS Certified Solutions Architect - Associate<br></br>
+      AWS Certified Sysops Administrator - Associate<br></br>
+      HashiCorp Certified: Terraform Associate<br></br>
+      AWS Certified Cloud Practitioner
+    </p>
     <ul class="clients-list">
       <li class="clients-item">
         <a href="https://www.credly.com/badges/6810366a-6a22-40ca-a356-0216c7b12c53/public_url">
@@ -88,7 +102,7 @@ export function getCertificates() {
           <img src={clfImage} alt="client logo" width="150" height="150"></img>
         </a>
       </li>
-    </ul>
+    </ul></>
   )
 }
 
@@ -125,7 +139,7 @@ export function getCredit() {
       >
         THIS
       </a>
-      {' '}source code. I modified and modularized it using React
+      {' '}source code. <br></br>I modified and modularized it using React.
     </p>
   )
 }
@@ -135,7 +149,7 @@ export function getMyEducation(){
 }
 
 export function getMyExp1(){
-  return ['Self-Employed', 'Software developer (Cloud)', '2023 - 2023', 'In my role, I managed AWS resources and optimized costs effectively for the team while also provisioning platforms and integrating CI processes using Gitlab, Jenkins, Docker, AWS, and Terraform. Additionally, I played a key role in the featured project involving Real Estate Data Crawling, Classification, and Storage, contributing to the development and deployment of web applications and automation tools. Furthermore, I conducted security research to fortify systems against potential threats and vulnerabilities, ensuring robust protection of sensitive data.']
+  return ['Self-Employed', 'Software developer (Cloud)', '2023', 'In my role, I managed AWS resources and optimized costs effectively for the team while also provisioning platforms and integrating CI processes using Gitlab, Jenkins, Docker, AWS, and Terraform. Additionally, I played a key role in the featured project involving Real Estate Data Crawling, Classification, and Storage, contributing to the development and deployment of web applications and automation tools. Furthermore, I conducted security research to fortify systems against potential threats and vulnerabilities, ensuring robust protection of sensitive data.']
 }
 
 export function getMyExp2(){

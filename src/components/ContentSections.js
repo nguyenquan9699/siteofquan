@@ -152,11 +152,14 @@ function ListOfService(listOfServices) {
 function ListOfDemos(listofDemos) {
   return (
     <ul className="skills-list content-card">
-      {listofDemos.map(item => (
-        <li className="skills-item">
-          <a href={item[1]}>
-            <div className="title-wrapper">
-              <h5 className="h5">{item[0]}</h5>
+      {listofDemos.map((item, index) => (
+        <li className="skills-item" key={item[1]}>
+          <a href={item[1]} style={{ textDecoration: 'none' }}>
+            <div className="title-wrapper" style={{ transition: 'background-color 0.3s' }}>
+              <h5 className="h5" style={{ display: 'flex', alignItems: 'center', margin: 0 }}>
+                <span style={{ marginRight: '0.5em' }}>{item[0]}</span>
+                <span style={{ marginLeft: 'auto' }}>➔</span>
+              </h5>
             </div>
           </a>
         </li>
@@ -164,6 +167,7 @@ function ListOfDemos(listofDemos) {
     </ul>
   );
 }
+
 
 function TimelineItem(title, subtitle, time, content) {
   return (

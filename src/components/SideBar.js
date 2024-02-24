@@ -1,8 +1,10 @@
 import '../assets/css/style.css'
-import avatar from '../assets/image/avatar.jpg'
-import mail from '../assets/image/mail.png'
+import avatar from '../assets/image/avatar.png'
+import mail from '../assets/image/mail.jpg'
 import phone from '../assets/image/phone.jpg'
 import address from '../assets/image/address.png'
+import telegram from '../assets/image/telegram.png'
+import github from '../assets/image/github.png'
 import * as API from '../assets/js/query'
 
 function SideBar() {
@@ -26,49 +28,33 @@ function SideBar() {
         <div class="separator"></div>
 
         <ul class="contacts-list">
-          <li class="contact-item">
-            <div class="icon-box">
-              <img src={mail} alt={API.getMail()} width="30"></img>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Email</p>
-
-              <a href={`mailto:${API.getMail()}`} class="contact-link">
-                {API.getMail()}
-              </a>
-            </div>
-          </li>
-
-          <li class="contact-item">
-            <div class="icon-box">
-              <img src={phone} alt={API.getPhone()} width="25"></img>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Phone</p>
-
-              <a href={`tel:${API.getPhone()}`} class="contact-link">
-                {API.getPhone()}
-              </a>
-            </div>
-          </li>
-
-          <li class="contact-item">
-            <div class="icon-box">
-              <img src={address} alt={API.getAddress()} width="25"></img>
-            </div>
-
-            <div class="contact-info">
-              <p class="contact-title">Location</p>
-
-              <address>{API.getAddress()}</address>
-            </div>
-          </li>
+          <ContactItem data={API.getMail()} image={mail} title="Email" method={`mailto:${API.getMail()}`}/>
+          <ContactItem data={API.getPhone()} image={phone} title="Phone" method={`tel:${API.getPhone()}`}/>
+          <ContactItem data={API.getTelegram()} image={telegram} title="Telegram" method={API.getTelegram()}/>
+          <ContactItem data={API.getGithub()} image={github} title="Github" method={API.getGithub()}/>
+          <ContactItem data={API.getAddress()} image={address} title="Location" method="#"/>
         </ul>
       </div>
     </aside>
   )
+}
+
+function ContactItem({data, image, title, iconWidth, method}){
+  return (
+    <li class="contact-item">
+      <div class="icon-box">
+        <img src={image} alt={data} width='25'></img>
+      </div>
+
+      <div class="contact-info">
+      <p class="contact-title">{title}</p>
+
+      <a href={method} class="contact-link">
+        {data}
+      </a>
+      </div>
+    </li>
+  );
 }
 
 export default SideBar
