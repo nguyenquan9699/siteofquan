@@ -49,7 +49,7 @@ export function getIntro() {
 }
 
 export function getMyServices() {
-  return ['Web Developing', 'Automation Tools/Bot Developing', 'Integrating CI/CD', 'Optimize costs, deploy on Cloud / VPS']
+  return ['Web Developing', 'Automation Tools/Bot Developing', 'Integrating CI/CD', 'Optimizing costs, deploy on Cloud / VPS']
 }
 
 export function getTechskills() {
@@ -137,21 +137,21 @@ export function getCredit() {
         class="about-text"
         href="https://github.com/codewithsadee/vcard-personal-portfolio"
       >
-        THIS
+        THIS SOURCE CODE
       </a>
-      {' '}source code. <br></br>I modified and modularized it using React.
+      {' '}. <br></br>I am modifying and modularizing it using React.
     </p>
   )
 }
 
 export function getMyEducation(){
-  return ['Ho Chi Minh City University of Science', 'Honors Program, Faculty of Information Technology', '2017 — 2021', 'During my university studies, I actively engaged in scientific research, notably contributing to the publication of a paper titled "Security Issues in Android Application Development and Plug-in for Android Studio to Support Secure Programming." Additionally, I undertook various mini-projects, including demos to further explore and apply theoretical knowledge. For my graduation project, I focused on the development of an Android Studio Static Code Analysis Plugin, aimed at enhancing security by identifying and fixing vulnerabilities in code. These experiences not only deepened my understanding of security issues in Android development but also honed my practical skills in developing solutions to address them.']
+  return ['Ho Chi Minh City University of Science', 'Honors Program, Faculty of Information Technology', '2017 — 2021', 'During college, I participated in the honors program and learned programming with different technologies. For each subject and in my free time, I have written some projects such as an Android app that helps unlock Linux like a car remote key, a learning website, and games written in C++ on the terminal and so on.','I have been involved in scientific research, in major contributing to the publication of a paper titled "Security Issues in Android App Development and Plug-ins for Android Studio to Support Secure Programming " at Springer. That was also my graduation project, developing the Static Code Analysis Plugin, to help Android programmers write safer code, quite similar to SonarLint with flexible custom rules and recommended fixes.']
 }
 
 export function getMyExp1(){
-  return ['Self-Employed', 'Software developer (Cloud)', '2023', 'In my role, I managed AWS resources and optimized costs effectively for the team while also provisioning platforms and integrating CI processes using Gitlab, Jenkins, Docker, AWS, and Terraform. Additionally, I played a key role in the featured project involving Real Estate Data Crawling, Classification, and Storage, contributing to the development and deployment of web applications and automation tools. Furthermore, I conducted security research to fortify systems against potential threats and vulnerabilities, ensuring robust protection of sensitive data.']
+  return ['Viettel Cyber Security', 'Web Pentester', '2020 - 2021', 'While working at my previous company, I completed a training program on SysAdmin and Security knowledge to improve my Linux, Python skills. I was responsible for performing web penetration tests and testing backend code (mostly PHP and Java) with my mentor for a variety of clients, including banking institutions and government-owned entities.', 'My responsibilities also include writing detailed reports on found vulnerabilities, including critical bugs, for customers. I was also assigned the task of learning more and giving a presentation about the 1-day vulnerability.']
 }
 
 export function getMyExp2(){
-  return ['Viettel Cyber Security', 'Web Pentester', '2020 - 2021', 'During my tenure at my previous company, I completed an intensive training program in Sysadmin and Security, equipping myself with essential skills in these areas. I took on the responsibility of conducting Web penetration tests and audits for a wide range of clients, which included banking institutions and government-owned entities. In addition to executing these tests, I meticulously documented my findings in detailed pentest reports, ensuring clear communication of vulnerabilities and recommendations for mitigation. Furthermore, my role involved proactive research, leading to the identification and presentation of one-day vulnerabilities, contributing to the enhancement of our overall security posture.']
+  return ['Self-Employed', 'Software developer | Cloud Engineer', '2023', 'I work as a freelancer, developing web applications and automated tools as required. My feature project is to develop a tool to get real estate trade data from different sources serving filter and retrieve. Occasionally I also spot and submit some vulnerabilities in the wild.', 'Then I knew that using Amazon Web Services properly would save costs in some cases, as well as improve my capabilities, so I taught myself and applied it along with other DevOps skills. like Docker, Terraform, CI/CD with Jenkins.']
 }

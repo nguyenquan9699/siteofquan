@@ -169,7 +169,7 @@ function ListOfDemos(listofDemos) {
 }
 
 
-function TimelineItem(title, subtitle, time, content) {
+function TimelineItem(title, subtitle, time, ...contents) {
   return (
     <li class="timeline-item">
       <h4 class="h4 timeline-item-title">
@@ -180,9 +180,9 @@ function TimelineItem(title, subtitle, time, content) {
       </h5>
       <span>{time}</span>
 
-      <p class="timeline-text">
-        {content}
-      </p>
+      {Object.values(contents).map((content, index) => (
+          <p key={index} className="timeline-text">{content}</p>
+      ))}
     </li>
   );
 }
