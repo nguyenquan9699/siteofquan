@@ -7,7 +7,6 @@ function App() {
     <main>
       <SideBar />
       <Body />
-      <img src="./assets/image/avatar.jpg" alt=""></img>
     </main>
   )
 }
