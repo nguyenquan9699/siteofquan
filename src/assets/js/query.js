@@ -37,13 +37,8 @@ export function getGithub() {
 export function getIntro() {
   return (
     <p>
-      I am a DevOps/Cloud Engineer proficient with Amazon Web Service, Linux, and
-      CI/CD. I participated in different roles in software development. My
-      previous experience also includes a pentester role at Viettel Cyber
-      Security, providing a good background in security.<br></br> I am a fast
-      learner and always maintain an open mindset and eagerness to acquire new
-      technology skills for enhancing product delivery. I can work
-      independently, also a team player.
+      As a DevOps/Cloud Engineer, I am proficient in Amazon Web Services, Linux, and CI/CD. My involvement in various software development roles has honed my expertise. Additionally, I have experience as a pentester at Viettel Cyber Security, which solidifies my background in security.<br></br>
+      I possess a rapid learning ability and consistently maintain an open mindset, eagerly embracing new technology skills to improve products. I am proficient at both independent work and collaborative teamwork.
     </p>
   )
 }
@@ -65,7 +60,7 @@ export function getSoftskills() {
 }
 
 export function getLangskills() {
-  return ['Vietnamese - Native', 'English']
+  return ['Vietnamese - Native', 'English - Ad']
 }
 
 export function getCertificates() {
@@ -145,7 +140,7 @@ export function getCredit() {
 }
 
 export function getMyEducation(){
-  return ['Ho Chi Minh City University of Science', 'Honors Program, Faculty of Information Technology', '2017 — 2021', 'During college, I participated in the honors program and learned programming with different technologies. For each subject and in my free time, I have written some projects such as an Android app that helps unlock Linux like a car remote key, a learning website, and games written in C++ on the terminal and so on.','I have been involved in scientific research, in major contributing to the publication of a paper titled "Security Issues in Android App Development and Plug-ins for Android Studio to Support Secure Programming " at Springer. That was also my graduation project, developing the Static Code Analysis Plugin, to help Android programmers write safer code, quite similar to SonarLint with flexible custom rules and recommended fixes.']
+  return ['Ho Chi Minh City University of Science', 'Honors Program, Faculty of Information Technology', '2017 — 2021', 'During my university years, I pursued honors programming, where I delved into programming using various technologies. Alongside my coursework, I dedicated my free time to crafting several projects, including an Android application designed to mimic a car remote key for unlocking Linux and managing users passwords, an e-learning website, and terminal-based games developed in C++, among others.', 'Furthermore, I participated in scientific research, making significant contributions that led to the publication of a paper titled "Security Issues in Android App Development and Plug-ins for Android Studio to Support Secure Programming" by Springer. This paper also served as my graduation project, wherein I developed the Static Code Analysis Plugin. This tool aids Android programmers in writing safer code by offering flexible custom rules and recommended fixes, akin to SonarLint.']
 }
 
 export function getMyExp1(){
