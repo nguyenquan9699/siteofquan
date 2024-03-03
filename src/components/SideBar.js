@@ -44,6 +44,9 @@ function SideBar() {
 
           <p class="title">{position}</p>
         </div>
+        <button class="info_more-btn" data-sidebar-btn="">
+          Show Contacts
+        </button>
       </div>
 
       <div class="sidebar-info_more">
