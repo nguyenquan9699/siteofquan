@@ -43,8 +43,9 @@ export async function getTechskills() {
   return data['value'];
 }
 
-export function getSomeCode() {
-  return [['Check This Page CI/CD Pinelines', 'https://github.com/nguyenquan9699/siteofquan-FE/tree/main/.github/workflows'], ['Check This Page Infrastructure', 'https://github.com/nguyenquan9699/siteofquan-infra'], ['Check This Page Source', 'https://github.com/nguyenquan9699/siteofquan-FE'], ['Check My Graduation Plugin Project', 'https://plugins.jetbrains.com/plugin/17142-9fix'], ['Some College Project Demos', 'https://www.youtube.com/watch?v=lijx1dan17Q&list=PLn6LVePqCRFdYKbVK3lPLYAe5WW3tKr50']]
+export async function getSomeCode() {
+  const data = await fetchData(apiUrl, 'somecode');
+  return data['value'];
 }
 
 export async function getSoftskills() {

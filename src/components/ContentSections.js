@@ -104,15 +104,18 @@ export function SkillsSections() {
   const [techSkills, setTechSkills] = useState('');
   const [softSkills, setSoftSkills] = useState('');
   const [langSkills, setLangSkills] = useState('');
+  const [demos, setDemos] = useState('');
   useEffect(() => {
     const fetchData = async () => {
       try {
         const fetchedTechSkills = await API.getTechskills();
         const fetchedSoftSkills = await API.getSoftskills();
         const fetchedLangSkills = await API.getLangskills();
+        const fetchedDemos = await API.getSomeCode();
         setTechSkills(fetchedTechSkills);
         setSoftSkills(fetchedSoftSkills);
         setLangSkills(fetchedLangSkills);
+        setDemos(fetchedDemos);
       } catch (error) {
         console.error('Error fetching name:', error);
       }
@@ -133,7 +136,7 @@ export function SkillsSections() {
       <section class="skill">
         <h3 class="h3 skills-title">More details</h3>
 
-        {ListOfDemos(API.getSomeCode())}
+        {ListOfDemos(demos)}
       </section>
 
       <br></br>
@@ -246,20 +249,24 @@ function ListOfService(listOfServices) {
 }
 
 function ListOfDemos(listofDemos) {
+  const serviceItems = [];
+  for (let i = 0; i < listofDemos.length; i++) {
+    serviceItems.push(
+      <li className="skills-item" key={listofDemos[i]['title']}>
+        <a href={listofDemos[i]['url']} style={{ textDecoration: 'none' }}>
+          <div className="title-wrapper" style={{ transition: 'background-color 0.3s' }}>
+            <h5 className="h5" style={{ display: 'flex', alignItems: 'center', margin: 0 }}>
+              <span style={{ marginRight: '0.5em' }}>{listofDemos[i]['title']}</span>
+              <span style={{ marginLeft: 'auto' }}>➔</span>
+            </h5>
+          </div>
+        </a>
+      </li>
+    );
+  }
   return (
     <ul className="skills-list content-card">
-      {listofDemos.map((item, index) => (
-        <li className="skills-item" key={item[1]}>
-          <a href={item[1]} style={{ textDecoration: 'none' }}>
-            <div className="title-wrapper" style={{ transition: 'background-color 0.3s' }}>
-              <h5 className="h5" style={{ display: 'flex', alignItems: 'center', margin: 0 }}>
-                <span style={{ marginRight: '0.5em' }}>{item[0]}</span>
-                <span style={{ marginLeft: 'auto' }}>➔</span>
-              </h5>
-            </div>
-          </a>
-        </li>
-      ))}
+      {serviceItems}
     </ul>
   );
 }
