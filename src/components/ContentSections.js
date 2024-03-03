@@ -1,20 +1,60 @@
 import '../assets/css/style.css'
 import * as API from '../assets/js/query'
+import React, { useState, useEffect } from 'react';
 
 export function AboutSections() {
+  const [intro, setIntro] = useState('');
+  const [services, setServices] = useState('');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedIntro = await API.getIntro();
+        const fetchedServices = await API.getMyServices();
+        setIntro(fetchedIntro);
+        setServices(fetchedServices);
+      } catch (error) {
+        console.error('Error fetching name:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  const introParagraphs = intro.split('\\n').map((line, index) => (
+    <p key={index}>{line}</p>
+  ));
   return (
     <>
-      <section class="about-text">{API.getIntro()}</section>
+      <section class="about-text">{introParagraphs}</section>
 
       <section class="about-text">
         <h3 class="h3 service-title">What I can provide?</h3>
-        {ListOfService(API.getMyServices())}
+        {ListOfService(services)}
       </section>
     </>
   )
 }
 
 export function ResumeSections() {
+  const [education1, setEducation1] = useState('');
+  const [exp1, setExp1] = useState('');
+  const [exp2, setExp2] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedEdu1 = await API.getMyEducation();
+        const fetchedExp1 = await API.getMyExp1();
+        const fetchedExp2 = await API.getMyExp2();
+        setEducation1(fetchedEdu1);
+        setExp1(fetchedExp1);
+        setExp2(fetchedExp2);
+      } catch (error) {
+        console.error('Error fetching name:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       <section class="timeline">
@@ -32,7 +72,7 @@ export function ResumeSections() {
         </div>
 
         <ol class="timeline-list">
-          {TimelineItem(...API.getMyEducation())}
+          {TimelineItem(education1)}
         </ol>
       </section>
 
@@ -51,9 +91,9 @@ export function ResumeSections() {
         </div>
 
         <ol class="timeline-list">
-          {TimelineItem(...API.getMyExp1())}
+          {TimelineItem(exp1)}
 
-          {TimelineItem(...API.getMyExp2())}
+          {TimelineItem(exp2)}
         </ol>
       </section>
     </>
@@ -61,12 +101,34 @@ export function ResumeSections() {
 }
 
 export function SkillsSections() {
+  const [techSkills, setTechSkills] = useState('');
+  const [softSkills, setSoftSkills] = useState('');
+  const [langSkills, setLangSkills] = useState('');
+  const [demos, setDemos] = useState('');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedTechSkills = await API.getTechskills();
+        const fetchedSoftSkills = await API.getSoftskills();
+        const fetchedLangSkills = await API.getLangskills();
+        const fetchedDemos = await API.getSomeCode();
+        setTechSkills(fetchedTechSkills);
+        setSoftSkills(fetchedSoftSkills);
+        setLangSkills(fetchedLangSkills);
+        setDemos(fetchedDemos);
+      } catch (error) {
+        console.error('Error fetching name:', error);
+      }
+    };
+    fetchData();
+  }, []);
+  
   return (
     <>
       <section class="skill">
         <h3 class="h3 skills-title">Technical skills</h3>
 
-        {ListOfSkills(API.getTechskills())}
+        {ListOfSkills(techSkills)}
       </section>
 
       <br></br>
@@ -74,7 +136,7 @@ export function SkillsSections() {
       <section class="skill">
         <h3 class="h3 skills-title">More details</h3>
 
-        {ListOfDemos(API.getSomeCode())}
+        {ListOfDemos(demos)}
       </section>
 
       <br></br>
@@ -82,7 +144,7 @@ export function SkillsSections() {
       <section class="skill">
         <h3 class="h3 skills-title">Soft skills</h3>
 
-        {ListOfSkills(API.getSoftskills())}
+        {ListOfSkills(softSkills)}
       </section>
 
       <br></br>
@@ -90,13 +152,29 @@ export function SkillsSections() {
       <section class="skill">
         <h3 class="h3 skills-title">Languages</h3>
 
-        {ListOfSkills(API.getLangskills())}
+        {ListOfSkills(langSkills)}
       </section>
     </>
   )
 }
 
 export function AchievementsSections() {
+  const [awards, setAwards] = useState('');
+  const [publication, setPublication] = useState('');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedAwards = await API.getAwards();
+        const fetchedPublication = await API.getPublication();
+        setAwards(fetchedAwards);
+        setPublication(fetchedPublication);
+      } catch (error) {
+        console.error('Error fetching name:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       <section class="about-text">
@@ -106,83 +184,109 @@ export function AchievementsSections() {
 
       <section class="about-text">
         <h3 class="h3 service-title">Awards</h3>
-        {API.getAwards()}
+        {awards}
       </section>
 
       <section class="about-text">
         <h3 class="h3 service-title">Publication</h3>
-        {API.getPublication()}
+        {publication}
       </section>
     </>
   )
 }
 
 export function CreditSections() {
-  return <section class="about-text">{API.getCredit()}</section>
+  const [credit, setCredit] = useState('');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedCredit = await API.getCredit();
+        setCredit(fetchedCredit);
+      } catch (error) {
+        console.error('Error fetching name:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  return <section class="about-text">{credit}</section>
 }
 
 function ListOfSkills(listOfSkills) {
+  const skillItems = [];
+  for (let i = 0; i < listOfSkills.length; i++) {
+    skillItems.push(
+      <li className="skills-item">
+        <div className="title-wrapper">
+          <h5 className="h5">{listOfSkills[i]}</h5>
+        </div>
+      </li>
+    );
+  }
   return (
     <ul className="skills-list content-card" style={{cursor: 'default'}}>
-      {listOfSkills.map((skill, index) => (
-        <li key={index} className="skills-item">
-          <div className="title-wrapper">
-            <h5 className="h5">{skill}</h5>
-          </div>
-        </li>
-      ))}
+      {skillItems}
     </ul>
   )
 }
 
 function ListOfService(listOfServices) {
-  return (
-    <ol class="timeline-list">
-      {listOfServices.map((service) => (
-      <li class="timeline-item">
-        <h4 class="timeline-text">
-          {service}
+  const serviceItems = [];
+  for (let i = 0; i < listOfServices.length; i++) {
+    serviceItems.push(
+      <li className="timeline-item" key={i}>
+        <h4 className="timeline-text">
+          {listOfServices[i]}
         </h4>
       </li>
-      ))}
+    );
+  }
+  return (
+    <ol className="timeline-list">
+      {serviceItems}
     </ol>
   )
 }
 
 function ListOfDemos(listofDemos) {
+  const serviceItems = [];
+  for (let i = 0; i < listofDemos.length; i++) {
+    serviceItems.push(
+      <li className="skills-item" key={listofDemos[i]['title']}>
+        <a href={listofDemos[i]['url']} style={{ textDecoration: 'none' }}>
+          <div className="title-wrapper" style={{ transition: 'background-color 0.3s' }}>
+            <h5 className="h5" style={{ display: 'flex', alignItems: 'center', margin: 0 }}>
+              <span style={{ marginRight: '0.5em' }}>{listofDemos[i]['title']}</span>
+              <span style={{ marginLeft: 'auto' }}>➔</span>
+            </h5>
+          </div>
+        </a>
+      </li>
+    );
+  }
   return (
     <ul className="skills-list content-card">
-      {listofDemos.map((item, index) => (
-        <li className="skills-item" key={item[1]}>
-          <a href={item[1]} style={{ textDecoration: 'none' }}>
-            <div className="title-wrapper" style={{ transition: 'background-color 0.3s' }}>
-              <h5 className="h5" style={{ display: 'flex', alignItems: 'center', margin: 0 }}>
-                <span style={{ marginRight: '0.5em' }}>{item[0]}</span>
-                <span style={{ marginLeft: 'auto' }}>➔</span>
-              </h5>
-            </div>
-          </a>
-        </li>
-      ))}
+      {serviceItems}
     </ul>
   );
 }
 
 
-function TimelineItem(title, subtitle, time, ...contents) {
+function TimelineItem(data) {
+  const timeLineParagraphs = data && data['content'] ? 
+    data['content'].split('\\n').map((line, index) => (
+        <p key={index} className="timeline-text">{line}</p>
+    )) : [];
   return (
     <li class="timeline-item">
       <h4 class="h4 timeline-item-title">
-        {title}
+        {data['title']}
       </h4>
       <h5 class="h5 timeline-item-title">
-        {subtitle}
+        {data['subtitle']}
       </h5>
-      <span>{time}</span>
-
-      {Object.values(contents).map((content, index) => (
-          <p key={index} className="timeline-text">{content}</p>
-      ))}
+      <span>{data['time']}</span>
+      {timeLineParagraphs}
     </li>
   );
 }

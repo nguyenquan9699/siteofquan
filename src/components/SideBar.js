@@ -6,21 +6,43 @@ import address from '../assets/image/address.png'
 import telegram from '../assets/image/telegram.png'
 import github from '../assets/image/github.png'
 import * as API from '../assets/js/query'
+import React, { useState, useEffect } from 'react';
 
 function SideBar() {
+  const [name, setName] = useState('');
+  const [contact, setContact] = useState('');
+  const [position, setPosition] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedName = await API.getName();
+        const fetchedContact = await API.getContact();
+        const fetchedPosition = await API.getPosition();
+        setName(fetchedName);
+        setContact(fetchedContact);
+        setPosition(fetchedPosition);
+      } catch (error) {
+        console.error('Error fetching name:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+
   return (
     <aside class="sidebar" data-sidebar="">
       <div class="sidebar-info">
         <figure class="avatar-box">
-          <img src={avatar} alt={API.getName()} width="80"></img>
+          <img src={avatar} alt={name} width="80"></img>
         </figure>
 
         <div class="info-content">
-          <h1 class="name" title={API.getName()}>
-            {API.getName()}
+          <h1 class="name" title={name}>
+            {name}
           </h1>
 
-          <p class="title">{API.getPosition()}</p>
+          <p class="title">{position}</p>
         </div>
       </div>
 
@@ -28,11 +50,11 @@ function SideBar() {
         <div class="separator"></div>
 
         <ul class="contacts-list">
-          <ContactItem data={API.getMail()} image={mail} title="Email" method={`mailto:${API.getMail()}`}/>
-          <ContactItem data={API.getPhone()} image={phone} title="Phone" method={`tel:${API.getPhone()}`}/>
-          <ContactItem data={API.getTelegram()} image={telegram} title="Telegram" method={API.getTelegram()}/>
-          <ContactItem data={API.getGithub()} image={github} title="Github" method={API.getGithub()}/>
-          <ContactItem data={API.getAddress()} image={address} title="Location" method="#"/>
+          <ContactItem data={contact['mail']} image={mail} title="Email" method={`mailto:${contact['mail']}`}/>
+          <ContactItem data={contact['phone']} image={phone} title="Phone" method={`tel:${contact['phone']}`}/>
+          <ContactItem data={contact['telegram']} image={telegram} title="Telegram" method={`https://${contact['telegram']}`}/>
+          <ContactItem data={contact['github']} image={github} title="Github" method={`https://${contact['github']}`}/>
+          <ContactItem data={contact['address']} image={address} title="Location" method="#"/>
         </ul>
       </div>
     </aside>

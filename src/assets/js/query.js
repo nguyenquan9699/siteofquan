@@ -3,64 +3,59 @@ import saaImage from '../../assets/image/saa.png'
 import soaImage from '../../assets/image/soa.png'
 import terraformImage from '../../assets/image/terraform.png'
 import clfImage from '../../assets/image/clf.png'
-//import jetbrainsImage from '../../assets/image/jetbrains.png';
-import springerImage from '../../assets/image/springer.jpg'
+import { apiUrl } from '../../config'
 
-export function getName() {
-  return 'Nguyen Minh Quan'
+async function fetchData(url, field) {
+  const fullUrl = `${url}?field=${field}`;
+  console.log(fullUrl);
+  const response = await fetch(fullUrl);
+  if (!response.ok) throw new Error('Failed to fetch data');
+  return response.json();
 }
 
-export function getPosition() {
-  return 'DevOps Engineer'
+export async function getName() {
+  const data = await fetchData(apiUrl, 'name');
+  return data['value'];
 }
 
-export function getMail() {
-  return 'nguyenquan9699@gmail.com'
+export async function getContact() {
+  const data = await fetchData(apiUrl, 'contact');
+  return data;
 }
 
-export function getPhone() {
-  return '+84966159365'
+export async function getPosition() {
+  const data = await fetchData(apiUrl, 'position');
+  return data['value'];
 }
 
-export function getAddress() {
-  return 'Ho Chi Minh City, Vietnam'
+export async function getIntro() {
+  const data = await fetchData(apiUrl, 'intro');
+  return data['value'];
 }
 
-export function getTelegram() {
-  return 't.me/w3bqq'
+export async function getMyServices() {
+  const data = await fetchData(apiUrl, 'services');
+  return data['value'];
 }
 
-export function getGithub() {
-  return 'github.com/nguyenquan9699'
+export async function getTechskills() {
+  const data = await fetchData(apiUrl, 'techskills');
+  return data['value'];
 }
 
-export function getIntro() {
-  return (
-    <p>
-      As a DevOps/Cloud Engineer, I am proficient in Amazon Web Services, Linux, and CI/CD. My involvement in various software development roles has honed my expertise. Additionally, I have experience as a pentester at Viettel Cyber Security, which solidifies my background in security.<br></br>
-      I possess a rapid learning ability and consistently maintain an open mindset, eagerly embracing new technology skills to improve products. I am proficient at both independent work and collaborative teamwork.
-    </p>
-  )
+export async function getSomeCode() {
+  const data = await fetchData(apiUrl, 'somecode');
+  return data['value'];
 }
 
-export function getMyServices() {
-  return ['Web Developing', 'Automation Tools/Bot Developing', 'Integrating CI/CD', 'Optimizing costs, deploy on Cloud / VPS']
+export async function getSoftskills() {
+  const data = await fetchData(apiUrl, 'softskills');
+  return data['value'];
 }
 
-export function getTechskills() {
-  return ['Python', 'Amazon Web Service', 'Linux', 'Git', 'Infrastructure as Code: Terraform, Ansible', 'Containerization: Docker, Docker Compose', 'CI/CD: Jenkins, Github Actions']
-}
-
-export function getSomeCode() {
-  return [['Check This Page CI/CD Pinelines', 'https://github.com/nguyenquan9699/siteofquan-FE/tree/main/.github/workflows'], ['Check This Page Infrastructure', 'https://github.com/nguyenquan9699/siteofquan-infra'], ['Check This Page Source', 'https://github.com/nguyenquan9699/siteofquan-FE'], ['Check My Graduation Plugin Project', 'https://plugins.jetbrains.com/plugin/17142-9fix'], ['Some College Project Demos', 'https://www.youtube.com/watch?v=lijx1dan17Q&list=PLn6LVePqCRFdYKbVK3lPLYAe5WW3tKr50']]
-}
-
-export function getSoftskills() {
-  return ['Eager to Learn Attitude', 'Fast Learner / Adaptability', 'Problem-solving', 'Empathy']
-}
-
-export function getLangskills() {
-  return ['Vietnamese - Native', 'English - Ad']
+export async function getLangskills() {
+  const data = await fetchData(apiUrl, 'langskills');
+  return data['value'];
 }
 
 export function getCertificates() {
@@ -101,52 +96,32 @@ export function getCertificates() {
   )
 }
 
-export function getAwards() {
-  return (
-    <p>
-      Employee of the month of Viettel Cyber Security <br></br>
-      Top 5 VCS newcomer's CTF
-    </p>
-  )
+export async function getAwards() {
+  const data = await fetchData(apiUrl, 'awards');
+  return <div dangerouslySetInnerHTML={{ __html: data['value'] }} />
 }
 
-export function getPublication() {
-  return (
-    <a href="https://www.springerprofessional.de/en/security-issues-in-android-application-development-and-plug-in-f/19864406">
-      <p class="about-text">
-        Plug-in for Android Studio to Support Secure Programming (2021) at
-        Springerprofessional
-      </p>
-      <br></br>
-      <img src={springerImage} alt="client logo" width="134" height="100"></img>
-    </a>
-  )
+export async function getPublication() {
+  const data = await fetchData(apiUrl, 'publication');
+  return <div dangerouslySetInnerHTML={{ __html: data['value'] }} />
 }
 
-export function getCredit() {
-  return (
-    <p>
-      This portfolio based on {' '}
-      <a
-        style={{ display: 'inline' }}
-        class="about-text"
-        href="https://github.com/codewithsadee/vcard-personal-portfolio"
-      >
-        THIS SOURCE CODE
-      </a>
-      {' '}. <br></br>I am modifying and modularizing it using React.
-    </p>
-  )
+export async function getCredit() {
+  const data = await fetchData(apiUrl, 'credit');
+  return <div dangerouslySetInnerHTML={{ __html: data['value'] }} />
 }
 
-export function getMyEducation(){
-  return ['Ho Chi Minh City University of Science', 'Honors Program, Faculty of Information Technology', '2017 — 2021', 'During my university years, I pursued honors programming, where I delved into programming using various technologies. Alongside my coursework, I dedicated my free time to crafting several projects, including an Android application designed to mimic a car remote key for unlocking Linux and managing users passwords, an e-learning website, and terminal-based games developed in C++, among others.', 'Furthermore, I participated in scientific research, making significant contributions that led to the publication of a paper titled "Security Issues in Android App Development and Plug-ins for Android Studio to Support Secure Programming" by Springer. This paper also served as my graduation project, wherein I developed the Static Code Analysis Plugin. This tool aids Android programmers in writing safer code by offering flexible custom rules and recommended fixes, akin to SonarLint.']
+export async function getMyEducation(){
+  const data = await fetchData(apiUrl, 'education1');
+  return data;
 }
 
-export function getMyExp1(){
-  return ['Viettel Cyber Security', 'Web Pentester', '2020 - 2021', 'While working at my previous company, I completed a training program on SysAdmin and Security knowledge to improve my Linux, Python skills. I was responsible for performing web penetration tests and testing backend code (mostly PHP and Java) with my mentor for a variety of clients, including banking institutions and government-owned entities.', 'My responsibilities also include writing detailed reports on found vulnerabilities, including critical bugs, for customers. I was also assigned the task of learning more and giving a presentation about the 1-day vulnerability.']
+export async function getMyExp1(){
+  const data = await fetchData(apiUrl, 'experience1');
+  return data;
 }
 
-export function getMyExp2(){
-  return ['Self-Employed', 'Software developer | Cloud Engineer', '2023', 'I work as a freelancer, developing web applications and automated tools as required. My feature project is to develop a tool to get real estate trade data from different sources serving filter and retrieve. Occasionally I also spot and submit some vulnerabilities in the wild.', 'Then I knew that using Amazon Web Services properly would save costs in some cases, as well as improve my capabilities, so I taught myself and applied it along with other DevOps skills. like Docker, Terraform, CI/CD with Jenkins.']
+export async function getMyExp2(){
+  const data = await fetchData(apiUrl, 'experience2');
+  return data;
 }
