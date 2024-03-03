@@ -3,64 +3,59 @@ import saaImage from '../../assets/image/saa.png'
 import soaImage from '../../assets/image/soa.png'
 import terraformImage from '../../assets/image/terraform.png'
 import clfImage from '../../assets/image/clf.png'
-//import jetbrainsImage from '../../assets/image/jetbrains.png';
 import springerImage from '../../assets/image/springer.jpg'
 
-export function getName() {
-  return 'Nguyen Minh Quan'
+const apiUrl = 'https://yphm005ac2.execute-api.ap-southeast-1.amazonaws.com/v1/?';
+
+async function fetchData(url, field) {
+  const apiUrl = `${url}field=${field}`;
+  const response = await fetch(apiUrl);
+  if (!response.ok) throw new Error('Failed to fetch data');
+  return response.json();
 }
 
-export function getPosition() {
-  return 'DevOps Engineer'
+export async function getName() {
+  const data = await fetchData(apiUrl, 'name');
+  return data['value'];
 }
 
-export function getMail() {
-  return 'nguyenquan9699@gmail.com'
+export async function getContact() {
+  const data = await fetchData(apiUrl, 'contact');
+  return data;
 }
 
-export function getPhone() {
-  return '+84966159365'
+export async function getPosition() {
+  const data = await fetchData(apiUrl, 'position');
+  return data['value'];
 }
 
-export function getAddress() {
-  return 'Ho Chi Minh City, Vietnam'
+export async function getIntro() {
+  const data = await fetchData(apiUrl, 'intro');
+  return data['value'];
 }
 
-export function getTelegram() {
-  return 't.me/w3bqq'
+export async function getMyServices() {
+  const data = await fetchData(apiUrl, 'services');
+  return data['value'];
 }
 
-export function getGithub() {
-  return 'github.com/nguyenquan9699'
-}
-
-export function getIntro() {
-  return (
-    <p>
-      As a DevOps/Cloud Engineer, I am proficient in Amazon Web Services, Linux, and CI/CD. My involvement in various software development roles has honed my expertise. Additionally, I have experience as a pentester at Viettel Cyber Security, which solidifies my background in security.<br></br>
-      I possess a rapid learning ability and consistently maintain an open mindset, eagerly embracing new technology skills to improve products. I am proficient at both independent work and collaborative teamwork.
-    </p>
-  )
-}
-
-export function getMyServices() {
-  return ['Web Developing', 'Automation Tools/Bot Developing', 'Integrating CI/CD', 'Optimizing costs, deploy on Cloud / VPS']
-}
-
-export function getTechskills() {
-  return ['Python', 'Amazon Web Service', 'Linux', 'Git', 'Infrastructure as Code: Terraform, Ansible', 'Containerization: Docker, Docker Compose', 'CI/CD: Jenkins, Github Actions']
+export async function getTechskills() {
+  const data = await fetchData(apiUrl, 'techskills');
+  return data['value'];
 }
 
 export function getSomeCode() {
   return [['Check This Page CI/CD Pinelines', 'https://github.com/nguyenquan9699/siteofquan-FE/tree/main/.github/workflows'], ['Check This Page Infrastructure', 'https://github.com/nguyenquan9699/siteofquan-infra'], ['Check This Page Source', 'https://github.com/nguyenquan9699/siteofquan-FE'], ['Check My Graduation Plugin Project', 'https://plugins.jetbrains.com/plugin/17142-9fix'], ['Some College Project Demos', 'https://www.youtube.com/watch?v=lijx1dan17Q&list=PLn6LVePqCRFdYKbVK3lPLYAe5WW3tKr50']]
 }
 
-export function getSoftskills() {
-  return ['Eager to Learn Attitude', 'Fast Learner / Adaptability', 'Problem-solving', 'Empathy']
+export async function getSoftskills() {
+  const data = await fetchData(apiUrl, 'softskills');
+  return data['value'];
 }
 
-export function getLangskills() {
-  return ['Vietnamese - Native', 'English - Ad']
+export async function getLangskills() {
+  const data = await fetchData(apiUrl, 'langskills');
+  return data['value'];
 }
 
 export function getCertificates() {

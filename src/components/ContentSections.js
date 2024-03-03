@@ -1,14 +1,34 @@
 import '../assets/css/style.css'
 import * as API from '../assets/js/query'
+import React, { useState, useEffect } from 'react';
 
 export function AboutSections() {
+  const [intro, setIntro] = useState('');
+  const [services, setServices] = useState('');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedIntro = await API.getIntro();
+        const fetchedServices = await API.getMyServices();
+        setIntro(fetchedIntro);
+        setServices(fetchedServices);
+      } catch (error) {
+        console.error('Error fetching name:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  const introParagraphs = intro.split('\\n').map((line, index) => (
+    <p key={index}>{line}</p>
+  ));
   return (
     <>
-      <section class="about-text">{API.getIntro()}</section>
+      <section class="about-text">{introParagraphs}</section>
 
       <section class="about-text">
         <h3 class="h3 service-title">What I can provide?</h3>
-        {ListOfService(API.getMyServices())}
+        {ListOfService(services)}
       </section>
     </>
   )
@@ -61,12 +81,31 @@ export function ResumeSections() {
 }
 
 export function SkillsSections() {
+  const [techSkills, setTechSkills] = useState('');
+  const [softSkills, setSoftSkills] = useState('');
+  const [langSkills, setLangSkills] = useState('');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedTechSkills = await API.getTechskills();
+        const fetchedSoftSkills = await API.getSoftskills();
+        const fetchedLangSkills = await API.getLangskills();
+        setTechSkills(fetchedTechSkills);
+        setSoftSkills(fetchedSoftSkills);
+        setLangSkills(fetchedLangSkills);
+      } catch (error) {
+        console.error('Error fetching name:', error);
+      }
+    };
+    fetchData();
+  }, []);
+  
   return (
     <>
       <section class="skill">
         <h3 class="h3 skills-title">Technical skills</h3>
 
-        {ListOfSkills(API.getTechskills())}
+        {ListOfSkills(techSkills)}
       </section>
 
       <br></br>
@@ -82,7 +121,7 @@ export function SkillsSections() {
       <section class="skill">
         <h3 class="h3 skills-title">Soft skills</h3>
 
-        {ListOfSkills(API.getSoftskills())}
+        {ListOfSkills(softSkills)}
       </section>
 
       <br></br>
@@ -90,7 +129,7 @@ export function SkillsSections() {
       <section class="skill">
         <h3 class="h3 skills-title">Languages</h3>
 
-        {ListOfSkills(API.getLangskills())}
+        {ListOfSkills(langSkills)}
       </section>
     </>
   )
@@ -122,29 +161,37 @@ export function CreditSections() {
 }
 
 function ListOfSkills(listOfSkills) {
+  const skillItems = [];
+  for (let i = 0; i < listOfSkills.length; i++) {
+    skillItems.push(
+      <li className="skills-item">
+        <div className="title-wrapper">
+          <h5 className="h5">{listOfSkills[i]}</h5>
+        </div>
+      </li>
+    );
+  }
   return (
     <ul className="skills-list content-card" style={{cursor: 'default'}}>
-      {listOfSkills.map((skill, index) => (
-        <li key={index} className="skills-item">
-          <div className="title-wrapper">
-            <h5 className="h5">{skill}</h5>
-          </div>
-        </li>
-      ))}
+      {skillItems}
     </ul>
   )
 }
 
 function ListOfService(listOfServices) {
-  return (
-    <ol class="timeline-list">
-      {listOfServices.map((service) => (
-      <li class="timeline-item">
-        <h4 class="timeline-text">
-          {service}
+  const serviceItems = [];
+  for (let i = 0; i < listOfServices.length; i++) {
+    serviceItems.push(
+      <li className="timeline-item" key={i}>
+        <h4 className="timeline-text">
+          {listOfServices[i]}
         </h4>
       </li>
-      ))}
+    );
+  }
+  return (
+    <ol className="timeline-list">
+      {serviceItems}
     </ol>
   )
 }
