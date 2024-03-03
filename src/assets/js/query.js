@@ -3,12 +3,12 @@ import saaImage from '../../assets/image/saa.png'
 import soaImage from '../../assets/image/soa.png'
 import terraformImage from '../../assets/image/terraform.png'
 import clfImage from '../../assets/image/clf.png'
-
-const apiUrl = 'https://yphm005ac2.execute-api.ap-southeast-1.amazonaws.com/v1/?';
+import { apiUrl } from '../../config'
 
 async function fetchData(url, field) {
-  const apiUrl = `${url}field=${field}`;
-  const response = await fetch(apiUrl);
+  const fullUrl = `${url}?field=${field}`;
+  console.log(fullUrl);
+  const response = await fetch(fullUrl);
   if (!response.ok) throw new Error('Failed to fetch data');
   return response.json();
 }
