@@ -35,6 +35,26 @@ export function AboutSections() {
 }
 
 export function ResumeSections() {
+  const [education1, setEducation1] = useState('');
+  const [exp1, setExp1] = useState('');
+  const [exp2, setExp2] = useState('');
+
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedEdu1 = await API.getMyEducation();
+        const fetchedExp1 = await API.getMyExp1();
+        const fetchedExp2 = await API.getMyExp2();
+        setEducation1(fetchedEdu1);
+        setExp1(fetchedExp1);
+        setExp2(fetchedExp2);
+      } catch (error) {
+        console.error('Error fetching name:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       <section class="timeline">
@@ -52,7 +72,7 @@ export function ResumeSections() {
         </div>
 
         <ol class="timeline-list">
-          {TimelineItem(...API.getMyEducation())}
+          {TimelineItem(education1)}
         </ol>
       </section>
 
@@ -71,9 +91,9 @@ export function ResumeSections() {
         </div>
 
         <ol class="timeline-list">
-          {TimelineItem(...API.getMyExp1())}
+          {TimelineItem(exp1)}
 
-          {TimelineItem(...API.getMyExp2())}
+          {TimelineItem(exp2)}
         </ol>
       </section>
     </>
@@ -136,6 +156,22 @@ export function SkillsSections() {
 }
 
 export function AchievementsSections() {
+  const [awards, setAwards] = useState('');
+  const [publication, setPublication] = useState('');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedAwards = await API.getAwards();
+        const fetchedPublication = await API.getPublication();
+        setAwards(fetchedAwards);
+        setPublication(fetchedPublication);
+      } catch (error) {
+        console.error('Error fetching name:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
   return (
     <>
       <section class="about-text">
@@ -145,19 +181,32 @@ export function AchievementsSections() {
 
       <section class="about-text">
         <h3 class="h3 service-title">Awards</h3>
-        {API.getAwards()}
+        {awards}
       </section>
 
       <section class="about-text">
         <h3 class="h3 service-title">Publication</h3>
-        {API.getPublication()}
+        {publication}
       </section>
     </>
   )
 }
 
 export function CreditSections() {
-  return <section class="about-text">{API.getCredit()}</section>
+  const [credit, setCredit] = useState('');
+  useEffect(() => {
+    const fetchData = async () => {
+      try {
+        const fetchedCredit = await API.getCredit();
+        setCredit(fetchedCredit);
+      } catch (error) {
+        console.error('Error fetching name:', error);
+      }
+    };
+
+    fetchData();
+  }, []);
+  return <section class="about-text">{credit}</section>
 }
 
 function ListOfSkills(listOfSkills) {
@@ -216,20 +265,21 @@ function ListOfDemos(listofDemos) {
 }
 
 
-function TimelineItem(title, subtitle, time, ...contents) {
+function TimelineItem(data) {
+  const timeLineParagraphs = data && data['content'] ? 
+    data['content'].split('\\n').map((line, index) => (
+        <p key={index} className="timeline-text">{line}</p>
+    )) : [];
   return (
     <li class="timeline-item">
       <h4 class="h4 timeline-item-title">
-        {title}
+        {data['title']}
       </h4>
       <h5 class="h5 timeline-item-title">
-        {subtitle}
+        {data['subtitle']}
       </h5>
-      <span>{time}</span>
-
-      {Object.values(contents).map((content, index) => (
-          <p key={index} className="timeline-text">{content}</p>
-      ))}
+      <span>{data['time']}</span>
+      {timeLineParagraphs}
     </li>
   );
 }
